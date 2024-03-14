@@ -17,7 +17,9 @@
 #define MIN 18
 #define ROUND 1
 
+void calcolaStatistiche(int totPromosso, int totBocciato);
 float calcolaPunteggio(int giuste, int sbagliate, float punteggioGiusta, float penalita);
+void calcolaStatistiche(int totPromosso, int totBocciato);
 void calcolaCombinazioni(int totDomande, float punteggioGiusta, float penalita, float min, int arrotondamento);
 void stampaCombinazione(int giuste, int sbagliate, int nonDate, float risultato, float risultatoArrotondato, float min, int promosso);
 
@@ -63,7 +65,7 @@ float calcolaPunteggio(int giuste, int sbagliate, float punteggioGiusta, float p
 }
 
 void calcolaCombinazioni(int totDomande, float punteggioGiusta, float penalita, float min, int arrotondamento){
-    int giuste, sbagliate, nonDate, promosso;
+    int giuste, sbagliate, nonDate, promosso, totP=0, totB=0, i=0;
     float risultato, risultatoArrotondato;
     
     for(giuste=0;giuste<=totDomande;giuste++){
@@ -71,9 +73,17 @@ void calcolaCombinazioni(int totDomande, float punteggioGiusta, float penalita, 
             nonDate=totDomande-(giuste+sbagliate);
             risultato=calcolaPunteggio(giuste, sbagliate, punteggioGiusta, penalita);
             risultatoArrotondato=arrotondamento?round(risultato):risultato;
-            promosso=risultatoArrotondato>=min?1:0;
+            if(promosso=risultatoArrotondato>=min?1:0) totP++;
+            else totB++;
+            printf("%3d) ", ++i);
             stampaCombinazione(giuste, sbagliate, nonDate, risultato, risultatoArrotondato, min, promosso);
         }
     }
+    calcolaStatistiche(totP, totB);
 }
 
+void calcolaStatistiche(int totPromosso, int totBocciato){
+    printf("\ntotal combinations: %5d\n", totBocciato+totPromosso);
+    printf("passed:     %5d (%.2f%%)\n", totPromosso, (float)100*totPromosso/(totBocciato+totPromosso));
+    printf("not passed: %5d (%.2f%%)\n", totBocciato, (float)100*totBocciato/(totBocciato+totPromosso));
+}
