@@ -27,13 +27,19 @@ int main(){
     char s[50];
     
     #if INPUT
-    printf("number of questions: ");   scanf("%d", &tot);
-    printf("minimum score to pass: "); scanf("%f", &min);
-    printf("correct answer value: ");  scanf("%f", &giusta);
-    printf("wrong answer penalty: ");  scanf("%f", &sbagliata);
+    printf("number of questions: ");   
+    scanf("%d", &tot);
+    printf("minimum score to pass: "); 
+    scanf("%f", &min);
+    printf("correct answer value: ");  
+    scanf("%f", &giusta);
+    printf("wrong answer penalty: ");  
+    scanf("%f", &sbagliata);
     while(continua){
-        printf("is the score rounded to get the final mark [Y/n]? "); scanf("%s", s);
-        if(strcmp(s, "Y")!=0 && strcmp(s, "n")!=0) printf("'%s' is not valid, insert 'Y' or 'n'\n", s);
+        printf("is the score rounded to get the final mark [Y/n]? "); 
+        scanf("%s", s);
+        if(strcmp(s, "Y")!=0 && strcmp(s, "n")!=0) 
+            printf("'%s' is not valid, insert 'Y' or 'n'\n", s);
         else{
             arrotondamento=strcmp(s, "Y")==0;
             continua=0;
